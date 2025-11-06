@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Apotek</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-clinic-medical"></i> Sistem Manajemen Apotek</h1>
+            <nav>
+                <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+                <button class="nav-btn" data-target="dokter">Dokter</button>
+                <button class="nav-btn" data-target="pasien">Pasien</button>
+                <button class="nav-btn" data-target="obat">Obat</button>
+                <button class="nav-btn" data-target="penjualan">Penjualan</button>
+                <button class="nav-btn" data-target="resep">Resep</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <h2>Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Dokter</h3>
+                        <p id="total-dokter">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Pasien</h3>
+                        <p id="total-pasien">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Obat</h3>
+                        <p id="total-obat">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Stok Rendah</h3>
+                        <p id="stok-rendah">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dokter Section -->
+            <section id="dokter" class="content-section">
+                <div class="section-header">
+                    <h2>Manajemen Dokter</h2>
+                    <button class="btn-primary" onclick="showDokterForm()">Tambah Dokter</button>
+                </div>
+                <div id="dokter-form" class="form-container" style="display: none;">
+                    <h3 id="form-dokter-title">Tambah Dokter Baru</h3>
+                    <form id="dokterForm">
+                        <input type="hidden" id="dokter-id">
+                        <div class="form-group">
+                            <label>Nama Dokter:</label>
+                            <input type="text" id="nama-dokter" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Spesialisasi:</label>
+                            <input type="text" id="spesialisasi">
+                        </div>
+                        <div class="form-group">
+                            <label>No Telepon:</label>
+                            <input type="text" id="no-telepon-dokter">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat:</label>
+                            <textarea id="alamat-dokter"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Nomor SIP:</label>
+                            <input type="text" id="nomor-sip">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Simpan</button>
+                            <button type="button" class="btn-secondary" onclick="hideDokterForm()">Batal</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="dokter-list" class="data-table-container">
+                    <!-- Data dokter akan dimuat di sini -->
+                </div>
+            </section>
+
+            <!-- Pasien Section -->
+            <section id="pasien" class="content-section">
+                <div class="section-header">
+                    <h2>Manajemen Pasien</h2>
+                    <button class="btn-primary" onclick="showPasienForm()">Tambah Pasien</button>
+                </div>
+                <div id="pasien-form" class="form-container" style="display: none;">
+                    <h3 id="form-pasien-title">Tambah Pasien Baru</h3>
+                    <form id="pasienForm">
+                        <input type="hidden" id="pasien-id">
+                        <div class="form-group">
+                            <label>Nama Pasien:</label>
+                            <input type="text" id="nama-pasien" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat:</label>
+                            <textarea id="alamat-pasien"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>No Telepon:</label>
+                            <input type="text" id="no-telepon-pasien">
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Lahir:</label>
+                            <input type="date" id="tanggal-lahir">
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis Kelamin:</label>
+                            <select id="jenis-kelamin">
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Riwayat Penyakit:</label>
+                            <textarea id="riwayat-penyakit"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Simpan</button>
+                            <button type="button" class="btn-secondary" onclick="hidePasienForm()">Batal</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="pasien-list" class="data-table-container">
+                    <!-- Data pasien akan dimuat di sini -->
+                </div>
+            </section>
+
+            <!-- Obat Section -->
+            <section id="obat" class="content-section">
+                <div class="section-header">
+                    <h2>Manajemen Obat</h2>
+                    <button class="btn-primary" onclick="showObatForm()">Tambah Obat</button>
+                </div>
+                <div id="obat-form" class="form-container" style="display: none;">
+                    <h3 id="form-obat-title">Tambah Obat Baru</h3>
+                    <form id="obatForm">
+                        <input type="hidden" id="obat-id">
+                        <div class="form-group">
+                            <label>Nama Obat:</label>
+                            <input type="text" id="nama-obat" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis Obat:</label>
+                            <input type="text" id="jenis-obat">
+                        </div>
+                        <div class="form-group">
+                            <label>Dosis:</label>
+                            <input type="text" id="dosis">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga:</label>
+                            <input type="number" id="harga-obat" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Stok:</label>
+                            <input type="number" id="stok-obat">
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Kadaluarsa:</label>
+                            <input type="date" id="tanggal-kadaluarsa">
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi:</label>
+                            <textarea id="deskripsi-obat"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Simpan</button>
+                            <button type="button" class="btn-secondary" onclick="hideObatForm()">Batal</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="obat-list" class="data-table-container">
+                    <!-- Data obat akan dimuat di sini -->
+                </div>
+            </section>
+
+            <!-- Penjualan Section -->
+            <section id="penjualan" class="content-section">
+                <h2>Manajemen Penjualan</h2>
+                <div id="penjualan-list" class="data-table-container">
+                    <!-- Data penjualan akan dimuat di sini -->
+                </div>
+            </section>
+
+            <!-- Resep Section -->
+            <section id="resep" class="content-section">
+                <h2>Manajemen Resep</h2>
+                <div id="resep-list" class="data-table-container">
+                    <!-- Data resep akan dimuat di sini -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
